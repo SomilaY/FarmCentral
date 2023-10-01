@@ -1,0 +1,151 @@
+﻿@model IEnumerable<PrototypeP1.Models.Product>
+
+@{
+    ViewData["Title"] = "ProductIndex";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #ffff00; 
+        }
+
+        .header {
+            font-family: "Comic Sans MS", cursive;
+            color: white; 
+            text-align: center; 
+            font-size: 50px; 
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 150px; 
+        }
+
+        table {
+            border-collapse: collapse; 
+            width: 100%;
+            outline: 1px solid white; 
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Farm Central</h1> 
+
+        <div class="logo-container">
+            <img src="~/assets/farmer.png" alt="Logo" class="logo"> 
+        </div>
+
+        <h1>Product Index</h1>
+
+        <form method="get">
+            <label for="supplierFilter">Filter by Supplier:</label>
+            <input type="text" id="supplierFilter" name="supplier" value="@ViewBag.SupplierFilter">
+
+            <label for="startDateFilter">Start Date:</label>
+            <input type="date" id="startDateFilter" name="startDate" value="@ViewBag.StartDateFilter">
+
+            <label for="endDateFilter">End Date:</label>
+            <input type="date" id="endDateFilter" name="endDate" value="@ViewBag.EndDateFilter">
+
+            <input type="submit" value="Apply Filter">
+        </form>
+
+
+        <tr></tr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductQuantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductSupplier)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AddedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateAdded)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductSupplier)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateAdded)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <form id="logoutForm" method="post" asp-action="Login" asp-controller="Employee" class="logout-button">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

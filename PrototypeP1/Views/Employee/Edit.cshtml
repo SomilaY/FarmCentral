@@ -1,0 +1,120 @@
+﻿@model PrototypeP1.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #ffff00; 
+        }
+
+        .header {
+            font-family: "Comic Sans MS", cursive;
+            color: white; 
+            text-align: center; 
+            font-size: 50px; 
+        }
+
+        .logo {
+            width: 100px; 
+            display: block; 
+            margin: 0 auto; 
+        }
+
+        hr {
+            border-color: white; 
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            border: 1px solid black; 
+        }
+
+        .btn-primary {
+            background-color: white; 
+            color: black; 
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Farm Central</h1> 
+
+        <div class="logo-container">
+            <img src="~/assets/farmer.png" alt="Logo" class="logo"> 
+        </div>
+
+        <h1>@ViewData["Title"]</h1>
+
+        <h4>Employee</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Employee_ID" class="control-label"></label>
+                        <input asp-for="Employee_ID" mame="txtEmployeeID" class="form-control" readonly />
+                        <span asp-validation-for="Employee_ID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="first_name" class="control-label"></label>
+                        <input asp-for="first_name" name="txtName" class="form-control" />
+                        <span asp-validation-for="first_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="last_name" class="control-label"></label>
+                        <input asp-for="last_name" name="txtSurname" class="form-control" />
+                        <span asp-validation-for="last_name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="username" class="control-label"></label>
+                        <input asp-for="username" name="txtUsername" class="form-control" />
+                        <span asp-validation-for="username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="password" class="control-label"></label>
+                        <input asp-for="password" name="txtPassword" class="form-control" readonly />
+                        <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="email" class="control-label"></label>
+                        <input asp-for="email" name="txtEmail" class="form-control" />
+                        <span asp-validation-for="email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+        <form id="logoutForm" method="post" asp-action="Login" asp-controller="Employee" class="logout-button">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+
+    <script>
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    </script>
+</body>
+</html>

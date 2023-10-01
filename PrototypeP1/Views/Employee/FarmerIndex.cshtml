@@ -1,0 +1,141 @@
+﻿@model IEnumerable<PrototypeP1.Models.Farmer>
+
+@{
+    ViewData["Title"] = "Farmer Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #ffff00; 
+        }
+
+        .header {
+            font-family: "Comic Sans MS", cursive; 
+            color: white; 
+            text-align: center; 
+            font-size: 50px; 
+        }
+
+        .logo {
+            width: 100px; 
+            display: block; 
+            margin: 0 auto; 
+        }
+
+        hr {
+            border-color: white;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            border: 1px solid black; 
+        }
+
+        .btn-primary {
+            background-color: white; 
+            color: black; 
+        }
+
+        table {
+            border-collapse: collapse; 
+            width: 100%;
+            outline: 1px solid white; 
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .actions {
+            text-align: right; 
+        }
+
+        .view-employee-list {
+            text-align: right; 
+            margin-top: 10px; 
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Farm Central</h1>
+        
+
+        <div class="logo-container">
+            <img src="~/assets/farmer.png" alt="Logo" class="logo" />
+           
+        </div>
+
+        <h1>@ViewData["Title"]</h1>
+
+        <p>
+            <a asp-controller="Employee" asp-action="CreateFarmer">Create New</a>
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FarmerID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.first_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.last_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.email)
+                    </th>
+                    <th class="actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FarmerID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.first_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.last_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td class="actions">
+                            @Html.ActionLink("Edit", "EditFarmer", new { id = item.FarmerID }) |
+                            @Html.ActionLink("Details", "FarmerDetails", new { id = item.FarmerID }) |
+                            @Html.ActionLink("Delete", "DeleteFarmer", new { id = item.FarmerID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="view-employee-list">
+        <a asp-controller="Employee" asp-action="Index">View Employee List</a>
+    </p>
+    <form id="logoutForm" method="post" asp-action="Login" asp-controller="Employee" class="logout-button">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
